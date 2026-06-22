@@ -3,6 +3,9 @@ const computerOutput = document.querySelector("#Computer");
 const humanOutput = document.querySelector("#Human");
 const resultOutput = document.querySelector("#Result");
 
+const bestWinStreakOutput = document.querySelector("#bestWinStreakScore");
+const winStreakOutput = document.querySelector("#winStreakScore");
+
 const roundOutput = document.querySelector("#rounds");
 
 const playerScoreOutput = document.querySelector("#playerScore");
@@ -15,9 +18,15 @@ let resultResult = "";
 
 let rounds = 0;
 
+let bestWinStreakScore = 0;
+let winStreakScore = 0;
+
 let playerScore = 0;
 let computerScore = 0;
 let drawScore = 0;
+
+bestWinStreakOutput.innerHTML = bestWinStreakScore;
+winStreakOutput.innerHTML = winStreakScore;
 
 roundOutput.innerHTML = rounds;
 
@@ -48,13 +57,13 @@ function play(choice) {
             break;
     }
 
-    computerOutput.innerHTML = computerChoice;
-
     rounds++;
     roundOutput.innerHTML = rounds;
 
     if (humanChoice === computerChoice) {
         resultResult = "Gelijkspel";
+        winStreakScore = 0;
+        winStreakOutput.innerHTML = winStreakScore;
         drawScore++;
         drawScoreOutput.innerHTML = drawScore;
     } else if (
@@ -63,15 +72,38 @@ function play(choice) {
         (humanChoice === "Schaar" && computerChoice === "Papier")
     ) {
         resultResult = "Jij wint!";
+        winStreakScore++;
+        winStreakOutput.innerHTML = winStreakScore;
+        if (winStreakScore > bestWinStreakScore) {
+            bestWinStreakScore = winStreakScore;
+            bestWinStreakOutput.innerHTML = bestWinStreakScore;
+        }
         playerScore++;
         playerScoreOutput.innerHTML = playerScore;
     } else {
         resultResult = "Computer wint!";
+        winStreakScore = 0;
+        winStreakOutput.innerHTML = winStreakScore;
         computerScore++;
         computerScoreOutput.innerHTML = computerScore;
     }
 
-    resultOutput.innerHTML = resultResult;
+
+    computerOutput.innerHTML = "...";
+    resultOutput.innerHTML = "3...";
+
+    setTimeout(() => {
+        resultOutput.innerHTML = "2...";
+    }, 500);
+
+    setTimeout(() => {
+        resultOutput.innerHTML = "1...";
+    }, 1000);
+
+    setTimeout(() => {
+        computerOutput.innerHTML = computerChoice;
+        resultOutput.innerHTML = resultResult;
+    }, 1500);
 
 }
 
@@ -92,11 +124,17 @@ btns.forEach(button => {
         computerScore = 0;
         drawScore = 0;
 
+        bestWinStreakScore = 0;
+        winStreakScore = 0;
+
         roundOutput.innerHTML = rounds;
 
         playerScoreOutput.innerHTML = playerScore;
         computerScoreOutput.innerHTML = computerScore;
         drawScoreOutput.innerHTML = drawScore;
+
+        bestWinStreakOutput.innerHTML = bestWinStreakScore;
+        winStreakOutput.innerHTML = winStreakScore;
 
         computerOutput.innerHTML = "Keuze van computer";
         humanOutput.innerHTML = "Jouw keuze komt hier, maak je keuze!";
