@@ -44,7 +44,18 @@ function game(game_choice) {
 
 }
 
+const btns = document.querySelectorAll("button"); 
+
 // Button click event
+
+btns.forEach(button => {
+    button.addEventListener("click", function(event) {
+        game(event.target.id);
+    });
+});
+
+
+/*
 const steenBtn = document.querySelector("#Steen");
 steenBtn.addEventListener("click", function(event) {
     game("Steen");
@@ -59,3 +70,4 @@ const schaarBtn = document.querySelector("#Schaar");
 schaarBtn.addEventListener("click", function(event) {
     game("Schaar");
 });
+*/
