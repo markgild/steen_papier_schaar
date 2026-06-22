@@ -18,12 +18,24 @@ function game(game_choice) {
 
     const randomNumber = Math.floor(Math.random() * 3) + 1;
 
-    if ( randomNumber === 1 ) {
+    /*if ( randomNumber === 1 ) {
         computerChoice = "Steen";
     } else if ( randomNumber === 2 ) {
         computerChoice = "Papier";
     } else if ( randomNumber === 3 ) {
         computerChoice = "Schaar";
+    }*/
+
+    switch (randomNumber) {
+        case 1:
+            computerChoice = "Steen";
+            break;
+        case 2:
+            computerChoice = "Papier";
+            break;
+        case 3:
+            computerChoice = "Schaar";
+            break;
     }
 
     computerOutput.innerHTML = computerChoice;
