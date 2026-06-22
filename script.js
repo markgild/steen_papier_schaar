@@ -3,9 +3,17 @@ const computerOutput = document.querySelector("#Computer");
 const humanOutput = document.querySelector("#Human");
 const resultOutput = document.querySelector("#Result");
 
+const playerScoreOutput = document.querySelector("#playerScore");
+const computerScoreOutput = document.querySelector("#computerScore");
+const drawScoreOutput = document.querySelector("#drawScore");
+
 let humanChoice = "";
 let computerChoice = "";
 let resultResult = "";
+
+let playerScore = 0;
+let computerScore = 0;
+let drawScore = 0;
 
 computerOutput.innerHTML = "Keuze van computer";
 humanOutput.innerHTML = "Jouw keuze komt hier, maak je keuze!";
@@ -42,14 +50,20 @@ function game(game_choice) {
 
     if (humanChoice === computerChoice) {
         resultResult = "Gelijkspel";
+        drawScore++;
+        drawScoreOutput.innerHTML = drawScore;
     } else if (
         (humanChoice === "Steen" && computerChoice === "Schaar") ||
         (humanChoice === "Papier" && computerChoice === "Steen") ||
         (humanChoice === "Schaar" && computerChoice === "Papier")
     ) {
         resultResult = "Jij wint!";
+        playerScore++;
+        playerScoreOutput.innerHTML = playerScore;
     } else {
         resultResult = "Computer wint!";
+        computerScore++;
+        computerScoreOutput.innerHTML = computerScore;
     }
 
     resultOutput.innerHTML = resultResult;
