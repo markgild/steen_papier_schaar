@@ -3,6 +3,8 @@ const computerOutput = document.querySelector("#Computer");
 const humanOutput = document.querySelector("#Human");
 const resultOutput = document.querySelector("#Result");
 
+const roundOutput = document.querySelector("#rounds");
+
 const playerScoreOutput = document.querySelector("#playerScore");
 const computerScoreOutput = document.querySelector("#computerScore");
 const drawScoreOutput = document.querySelector("#drawScore");
@@ -11,28 +13,28 @@ let humanChoice = "";
 let computerChoice = "";
 let resultResult = "";
 
+let rounds = 0;
+
 let playerScore = 0;
 let computerScore = 0;
 let drawScore = 0;
+
+roundOutput.innerHTML = rounds;
+
+playerScoreOutput.innerHTML = playerScore;
+computerScoreOutput.innerHTML = computerScore;
+drawScoreOutput.innerHTML = drawScore;
 
 computerOutput.innerHTML = "Keuze van computer";
 humanOutput.innerHTML = "Jouw keuze komt hier, maak je keuze!";
 resultOutput.innerHTML = "Resultaat van het spel";
 
-function game(game_choice) {
+function play(choice) {
 
-    humanChoice = game_choice;
+    humanChoice = choice;
     humanOutput.innerHTML = humanChoice;
 
     const randomNumber = Math.floor(Math.random() * 3) + 1;
-
-    /*if ( randomNumber === 1 ) {
-        computerChoice = "Steen";
-    } else if ( randomNumber === 2 ) {
-        computerChoice = "Papier";
-    } else if ( randomNumber === 3 ) {
-        computerChoice = "Schaar";
-    }*/
 
     switch (randomNumber) {
         case 1:
@@ -47,6 +49,9 @@ function game(game_choice) {
     }
 
     computerOutput.innerHTML = computerChoice;
+
+    rounds++;
+    roundOutput.innerHTML = rounds;
 
     if (humanChoice === computerChoice) {
         resultResult = "Gelijkspel";
@@ -70,30 +75,37 @@ function game(game_choice) {
 
 }
 
+
 const btns = document.querySelectorAll("button"); 
 
 // Button click event
 
 btns.forEach(button => {
     button.addEventListener("click", function(event) {
-        game(event.target.id);
+        
+        
+    if (event.target.id === "Reset") {
+
+        rounds = 0;
+
+        playerScore = 0;
+        computerScore = 0;
+        drawScore = 0;
+
+        roundOutput.innerHTML = rounds;
+
+        playerScoreOutput.innerHTML = playerScore;
+        computerScoreOutput.innerHTML = computerScore;
+        drawScoreOutput.innerHTML = drawScore;
+
+        computerOutput.innerHTML = "Keuze van computer";
+        humanOutput.innerHTML = "Jouw keuze komt hier, maak je keuze!";
+        resultOutput.innerHTML = "Resultaat van het spel";
+
+        return;
+    }
+
+        
+        play(event.target.id);
     });
 });
-
-
-/*
-const steenBtn = document.querySelector("#Steen");
-steenBtn.addEventListener("click", function(event) {
-    game("Steen");
-});
-
-const papierBtn = document.querySelector("#Papier");
-papierBtn.addEventListener("click", function(event) {
-    game("Papier");
-});
-
-const schaarBtn = document.querySelector("#Schaar");
-schaarBtn.addEventListener("click", function(event) {
-    game("Schaar");
-});
-*/
