@@ -25,6 +25,8 @@ let playerScore = 0;
 let computerScore = 0;
 let drawScore = 0;
 
+let busy = false;
+
 bestWinStreakOutput.innerHTML = bestWinStreakScore;
 winStreakOutput.innerHTML = winStreakScore;
 
@@ -39,6 +41,14 @@ humanOutput.innerHTML = "Jouw keuze komt hier, maak je keuze!";
 resultOutput.innerHTML = "Resultaat van het spel";
 
 function play(choice) {
+
+
+    if (busy) {
+        return;
+    }
+
+    busy = true;
+
 
     humanChoice = choice;
     humanOutput.innerHTML = humanChoice;
@@ -57,36 +67,6 @@ function play(choice) {
             break;
     }
 
-    rounds++;
-    roundOutput.innerHTML = rounds;
-
-    if (humanChoice === computerChoice) {
-        resultResult = "Gelijkspel";
-        winStreakScore = 0;
-        winStreakOutput.innerHTML = winStreakScore;
-        drawScore++;
-        drawScoreOutput.innerHTML = drawScore;
-    } else if (
-        (humanChoice === "Steen" && computerChoice === "Schaar") ||
-        (humanChoice === "Papier" && computerChoice === "Steen") ||
-        (humanChoice === "Schaar" && computerChoice === "Papier")
-    ) {
-        resultResult = "Jij wint!";
-        winStreakScore++;
-        winStreakOutput.innerHTML = winStreakScore;
-        if (winStreakScore > bestWinStreakScore) {
-            bestWinStreakScore = winStreakScore;
-            bestWinStreakOutput.innerHTML = bestWinStreakScore;
-        }
-        playerScore++;
-        playerScoreOutput.innerHTML = playerScore;
-    } else {
-        resultResult = "Computer wint!";
-        winStreakScore = 0;
-        winStreakOutput.innerHTML = winStreakScore;
-        computerScore++;
-        computerScoreOutput.innerHTML = computerScore;
-    }
 
 
     computerOutput.innerHTML = "...";
@@ -101,8 +81,44 @@ function play(choice) {
     }, 1000);
 
     setTimeout(() => {
+
+        rounds++;
+        roundOutput.innerHTML = rounds;
+
+        if (humanChoice === computerChoice) {
+            resultResult = "Gelijkspel";
+            winStreakScore = 0;
+            winStreakOutput.innerHTML = winStreakScore;
+            drawScore++;
+            drawScoreOutput.innerHTML = drawScore;
+        } else if (
+            (humanChoice === "Steen" && computerChoice === "Schaar") ||
+            (humanChoice === "Papier" && computerChoice === "Steen") ||
+            (humanChoice === "Schaar" && computerChoice === "Papier")
+        ) {
+            resultResult = "Jij wint!";
+            winStreakScore++;
+            winStreakOutput.innerHTML = winStreakScore;
+            if (winStreakScore > bestWinStreakScore) {
+                bestWinStreakScore = winStreakScore;
+                bestWinStreakOutput.innerHTML = bestWinStreakScore;
+            }
+            playerScore++;
+            playerScoreOutput.innerHTML = playerScore;
+        } else {
+            resultResult = "Computer wint!";
+            winStreakScore = 0;
+            winStreakOutput.innerHTML = winStreakScore;
+            computerScore++;
+            computerScoreOutput.innerHTML = computerScore;
+        }
+
         computerOutput.innerHTML = computerChoice;
         resultOutput.innerHTML = resultResult;
+
+
+        busy = false;
+    
     }, 1500);
 
 }
@@ -118,6 +134,10 @@ btns.forEach(button => {
         
     if (event.target.id === "Reset") {
 
+        if (busy) {
+            return;
+        }
+        
         rounds = 0;
 
         playerScore = 0;
