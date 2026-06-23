@@ -1,7 +1,7 @@
 body {
     margin: 0;
     padding: 0;
-    font-family: Arial, sans-serif;
+    font-family: "Trebuchet MS", sans-serif;
     text-align: center;
     background: linear-gradient(to right, #74ebd5, #ACB6E5);
 }
@@ -16,9 +16,11 @@ button {
 }
 button:hover {
     transform: scale(1.1);
+    background-color: #ACB6E5;
 }
 button:active {
-    background-color: gray;
+    transform: scale(0.9);
+    background-color:#74ebd5;
 }
 #Result {
     font-size: 40px;
