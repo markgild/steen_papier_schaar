@@ -4,6 +4,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Steen Papier Schaar</title>
+        <link rel="stylesheet" href="style.css">
     </head>
     <body>
         
@@ -21,26 +22,30 @@
 
         <br>
 
-        <h2>Score</h2>
+        <div class="scorebox">
 
-        <p>Rondes gespeeld: <span id="rounds"></span></p>
+            <h2>Score</h2>
 
-        <p>Best streak: <span id="bestWinStreakScore"></span></p>
+            <p>Rondes gespeeld: <span id="rounds"></span></p>
 
-        <p>Win streak: <span id="winStreakScore"></span></p>
+            <p>Best streak: <span id="bestWinStreakScore"></span></p>
 
-        <p>Win van jij: <span id="playerScore"></span></p>
+            <p>Win streak: <span id="winStreakScore"></span></p>
 
-        <p>Win van computer: <span id="computerScore"></span></p>
+            <p>Win van jij: <span id="playerScore"></span></p>
 
-        <p>Gelijkgespeeld: <span id="drawScore"></span></p>
+            <p>Win van computer: <span id="computerScore"></span></p>
 
-        <button id="Reset">Reset score</button>
+            <p>Gelijkgespeeld: <span id="drawScore"></span></p>
 
+            <button id="Reset">Reset score</button>
+
+        </div>
 
         <audio id="winSound" src="win.mp3"></audio>
         <audio id="loseSound" src="lose.mp3"></audio>
         <audio id="drawSound" src="draw.mp3"></audio>
+        <audio id="beepSound" src="beep.mp3"></audio>
 
 
         <script src="script.js"></script>

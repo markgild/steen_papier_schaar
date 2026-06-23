@@ -43,6 +43,7 @@ resultOutput.innerHTML = "Resultaat van het spel";
 const winSound = document.querySelector("#winSound");
 const loseSound = document.querySelector("#loseSound");
 const drawSound = document.querySelector("#drawSound");
+const beepSound = document.querySelector("#beepSound");
 
 function play(choice) {
 
@@ -53,6 +54,7 @@ function play(choice) {
 
     busy = true;
 
+    resultOutput.style.color = "black";
 
     humanChoice = choice;
     humanOutput.innerHTML = humanChoice;
@@ -76,12 +78,24 @@ function play(choice) {
     computerOutput.innerHTML = "...";
     resultOutput.innerHTML = "3...";
 
+    beepSound.pause();
+    beepSound.currentTime = 0;
+    beepSound.play();
+
     setTimeout(() => {
         resultOutput.innerHTML = "2...";
+
+        beepSound.pause();
+        beepSound.currentTime = 0;
+        beepSound.play();
     }, 1000);
 
     setTimeout(() => {
         resultOutput.innerHTML = "1...";
+
+        beepSound.pause();
+        beepSound.currentTime = 0;
+        beepSound.play();
     }, 2000);
 
     setTimeout(() => {
@@ -132,6 +146,16 @@ function play(choice) {
             computerScoreOutput.innerHTML = computerScore;
         }
 
+        if (resultResult === "Jij wint!") {
+            resultOutput.style.color = "green";
+        }
+        else if (resultResult === "Computer wint!") {
+            resultOutput.style.color = "red";
+        }
+        else {
+            resultOutput.style.color = "orange";
+        }
+
         computerOutput.innerHTML = computerChoice;
         resultOutput.innerHTML = resultResult;
 
@@ -178,6 +202,8 @@ btns.forEach(button => {
         computerOutput.innerHTML = "Keuze van computer";
         humanOutput.innerHTML = "Jouw keuze komt hier, maak je keuze!";
         resultOutput.innerHTML = "Resultaat van het spel";
+
+        resultOutput.style.color = "black";
 
         return;
     }
