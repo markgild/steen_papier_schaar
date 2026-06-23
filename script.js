@@ -40,6 +40,10 @@ computerOutput.innerHTML = "Keuze van computer";
 humanOutput.innerHTML = "Jouw keuze komt hier, maak je keuze!";
 resultOutput.innerHTML = "Resultaat van het spel";
 
+const winSound = document.querySelector("#winSound");
+const loseSound = document.querySelector("#loseSound");
+const drawSound = document.querySelector("#drawSound");
+
 function play(choice) {
 
 
@@ -74,11 +78,11 @@ function play(choice) {
 
     setTimeout(() => {
         resultOutput.innerHTML = "2...";
-    }, 500);
+    }, 1000);
 
     setTimeout(() => {
         resultOutput.innerHTML = "1...";
-    }, 1000);
+    }, 2000);
 
     setTimeout(() => {
 
@@ -87,6 +91,11 @@ function play(choice) {
 
         if (humanChoice === computerChoice) {
             resultResult = "Gelijkspel";
+
+            drawSound.pause();
+            drawSound.currentTime = 0;
+            drawSound.play();
+
             winStreakScore = 0;
             winStreakOutput.innerHTML = winStreakScore;
             drawScore++;
@@ -97,6 +106,11 @@ function play(choice) {
             (humanChoice === "Schaar" && computerChoice === "Papier")
         ) {
             resultResult = "Jij wint!";
+
+            winSound.pause();
+            winSound.currentTime = 0;
+            winSound.play();
+
             winStreakScore++;
             winStreakOutput.innerHTML = winStreakScore;
             if (winStreakScore > bestWinStreakScore) {
@@ -107,6 +121,11 @@ function play(choice) {
             playerScoreOutput.innerHTML = playerScore;
         } else {
             resultResult = "Computer wint!";
+
+            loseSound.pause();
+            loseSound.currentTime = 0;
+            loseSound.play();
+
             winStreakScore = 0;
             winStreakOutput.innerHTML = winStreakScore;
             computerScore++;
@@ -119,7 +138,7 @@ function play(choice) {
 
         busy = false;
     
-    }, 1500);
+    }, 3000);
 
 }
 
